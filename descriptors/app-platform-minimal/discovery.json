@@ -71,6 +71,192 @@
       "name": "mod-settings",
       "version": "1.3.2",
       "location": "http://sc-settings:8081"
+    },
+    {
+      "id": "mod-record-specifications-2.0.3",
+      "name": "mod-record-specifications",
+      "version": "2.0.3",
+      "location": "http://sc-record-specifications:8081"
+    },
+    {
+      "id": "mod-source-record-storage-5.10.15",
+      "name": "mod-source-record-storage",
+      "version": "5.10.15",
+      "location": "http://sc-source-record-storage:8081"
+    },
+    {
+      "id": "mod-source-record-manager-3.10.14",
+      "name": "mod-source-record-manager",
+      "version": "3.10.14",
+      "location": "http://sc-source-record-manager:8081"
+    },
+    {
+      "id": "mod-di-converter-storage-2.4.3",
+      "name": "mod-di-converter-storage",
+      "version": "2.4.3",
+      "location": "http://sc-di-converter-storage:8081"
+    },
+    {
+      "id": "mod-inventory-storage-29.0.23",
+      "name": "mod-inventory-storage",
+      "version": "29.0.23",
+      "location": "http://sc-inventory-storage:8081"
+    },
+    {
+      "id": "mod-entities-links-4.0.3",
+      "name": "mod-entities-links",
+      "version": "4.0.3",
+      "location": "http://sc-entities-links:8081"
+    },
+    {
+      "id": "mod-quick-marc-7.0.0",
+      "name": "mod-quick-marc",
+      "version": "7.0.0",
+      "location": "http://sc-quick-marc:8081"
+    },
+    {
+      "id": "mod-circulation-storage-17.4.3",
+      "name": "mod-circulation-storage",
+      "version": "17.4.3",
+      "location": "http://sc-circulation-storage:8081"
+    },
+    {
+      "id": "mod-circulation-24.4.20",
+      "name": "mod-circulation",
+      "version": "24.4.20",
+      "location": "http://sc-circulation:8081"
+    },
+    {
+      "id": "mod-feesfines-19.3.3",
+      "name": "mod-feesfines",
+      "version": "19.3.3",
+      "location": "http://sc-feesfines:8081"
+    },
+    {
+      "id": "mod-patron-blocks-1.12.3",
+      "name": "mod-patron-blocks",
+      "version": "1.12.3",
+      "location": "http://sc-patron-blocks:8081"
+    },
+    {
+      "id": "mod-patron-6.3.6",
+      "name": "mod-patron",
+      "version": "6.3.6",
+      "location": "http://sc-patron:8081"
+    },
+    {
+      "id": "mod-notify-3.4.1",
+      "name": "mod-notify",
+      "version": "3.4.1",
+      "location": "http://sc-notify:8081"
+    },
+    {
+      "id": "mod-sender-1.14.2",
+      "name": "mod-sender",
+      "version": "1.14.2",
+      "location": "http://sc-sender:8081"
+    },
+    {
+      "id": "mod-email-1.19.1",
+      "name": "mod-email",
+      "version": "1.19.1",
+      "location": "http://sc-email:8081"
+    },
+    {
+      "id": "mod-template-engine-1.22.2",
+      "name": "mod-template-engine",
+      "version": "1.22.2",
+      "location": "http://sc-template-engine:8081"
+    },
+    {
+      "id": "mod-calendar-3.3.1",
+      "name": "mod-calendar",
+      "version": "3.3.1",
+      "location": "http://sc-calendar:8081"
+    },
+    {
+      "id": "mod-pubsub-2.16.3",
+      "name": "mod-pubsub",
+      "version": "2.16.3",
+      "location": "http://sc-pubsub:8081"
+    },
+    {
+      "id": "mod-audit-2.11.5",
+      "name": "mod-audit",
+      "version": "2.11.5",
+      "location": "http://sc-audit:8081"
+    },
+    {
+      "id": "mod-inventory-21.1.20",
+      "name": "mod-inventory",
+      "version": "21.1.20",
+      "location": "http://sc-inventory:8081"
+    },
+    {
+      "id": "mod-event-config-2.9.1",
+      "name": "mod-event-config",
+      "version": "2.9.1",
+      "location": "http://sc-event-config:8081"
+    },
+    {
+      "id": "mod-batch-print-1.3.0",
+      "name": "mod-batch-print",
+      "version": "1.3.0",
+      "location": "http://sc-batch-print:8081"
+    },
+    {
+      "id": "mod-orders-storage-13.9.8",
+      "name": "mod-orders-storage",
+      "version": "13.9.8",
+      "location": "http://sc-orders-storage:8081"
+    },
+    {
+      "id": "mod-orders-13.0.10",
+      "name": "mod-orders",
+      "version": "13.0.10",
+      "location": "http://sc-orders:8081"
+    },
+    {
+      "id": "mod-invoice-storage-6.0.1",
+      "name": "mod-invoice-storage",
+      "version": "6.0.1",
+      "location": "http://sc-invoice-storage:8081"
+    },
+    {
+      "id": "mod-invoice-6.0.4",
+      "name": "mod-invoice",
+      "version": "6.0.4",
+      "location": "http://sc-invoice:8081"
+    },
+    {
+      "id": "mod-finance-5.1.3",
+      "name": "mod-finance",
+      "version": "5.1.3",
+      "location": "http://sc-finance:8081"
+    },
+    {
+      "id": "mod-finance-storage-8.8.8",
+      "name": "mod-finance-storage",
+      "version": "8.8.8",
+      "location": "http://sc-finance-storage:8081"
+    },
+    {
+      "id": "mod-organizations-storage-4.9.2",
+      "name": "mod-organizations-storage",
+      "version": "4.9.2",
+      "location": "http://sc-organizations-storage:8081"
+    },
+    {
+      "id": "mod-organizations-2.1.1",
+      "name": "mod-organizations",
+      "version": "2.1.1",
+      "location": "http://sc-organizations:8081"
+    },
+    {
+      "id": "mod-courses-1.4.13",
+      "name": "mod-courses",
+      "version": "1.4.13",
+      "location": "http://sc-courses:8081"
     }
   ]
 }

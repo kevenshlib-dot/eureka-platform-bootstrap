@@ -12,13 +12,12 @@ x-keycloak-service: &keycloak-service
     KC_DB_USERNAME: keycloak_rw
     KC_DB_PASSWORD: ${KC_DB_PASSWORD:-keycloak_admin}
     KC_PROXY: edge
-    KC_HOSTNAME: localhost
-    KC_HOSTNAME_PORT: 8080
+    # Keycloak 26 hostname v2: 用完整 URL 固定 issuer，使内网(keycloak:8080)
+    # 与外网(localhost:18080)签发的令牌 iss 一致，否则 sidecar UMA 评估报 invalid_token
+    KC_HOSTNAME: http://localhost:18080
     KC_HTTP_ENABLED: "true"
     KC_HEALTH_ENABLED: "true"
     KC_HTTP_MANAGEMENT_SCHEME: http
-    KC_HOSTNAME_STRICT: "false"
-    KC_HOSTNAME_STRICT_HTTPS: "false"
     JAVA_OPTS_APPEND: "-XX:MaxRAMPercentage=85.0"
   depends_on:
     db:
@@ -32,7 +31,8 @@ x-keycloak-service: &keycloak-service
     resources:
       limits:
         cpus: 1.0
-        memory: 1200m
+        # 1200m 在高负载授权流程中会被 OOMKill（exit 137），提高到 2g
+        memory: 2048m
       reservations:
         cpus: 1.0
         memory: 1200m
@@ -72,8 +72,8 @@ services:
     volumes:
       - ./nginx/keycloak-nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - "8080:8080"
-      - "127.0.0.1:9000:9000"
+      - "18080:8080"
+      - "127.0.0.1:19000:9000"
     healthcheck:
       test: ["CMD-SHELL", "curl -fs http://keycloak:8080/realms/master || exit 1"]
       interval: 3s

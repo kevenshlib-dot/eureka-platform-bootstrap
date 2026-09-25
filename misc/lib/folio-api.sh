@@ -105,7 +105,7 @@ obtain_system_access_token() {
     --data-urlencode "client_id=${KC_ADMIN_CLIENT_ID}" \
     --data-urlencode 'grant_type=client_credentials' \
     --data-urlencode "client_secret=${KC_ADMIN_CLIENT_SECRET}" \
-    'http://localhost:8080/realms/master/protocol/openid-connect/token' | jq -r '.access_token')"
+    'http://localhost:18080/realms/master/protocol/openid-connect/token' | jq -r '.access_token')"
 
   if [[ -z "$token" || "$token" == "null" ]]; then
     ui_error 'Failed to obtain system access token.'
@@ -144,7 +144,7 @@ obtain_tenant_access_token() {
     --data-urlencode "client_id=${client_id}" \
     --data-urlencode 'grant_type=client_credentials' \
     --data-urlencode "client_secret=${client_secret}" \
-    "http://localhost:8080/realms/${tenant}/protocol/openid-connect/token" | jq -r '.access_token')"
+    "http://localhost:18080/realms/${tenant}/protocol/openid-connect/token" | jq -r '.access_token')"
 
   if [[ -z "$token" || "$token" == 'null' ]]; then
     ui_error "Failed to obtain tenant access token for ${tenant}."

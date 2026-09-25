@@ -162,7 +162,7 @@ wait_for_http_ready() {
 # Both Kong and APISIX expose the proxy on host port 8000; 404 is expected when
 # no routes are registered yet (proxy is alive but has nothing to route to).
 wait_for_gateway_proxy_ready() {
-  wait_for_http_ready 'http://localhost:8000/' 'api-gateway proxy' '200 404'
+  wait_for_http_ready 'http://localhost:18000/' 'api-gateway proxy' '200 404'
 }
 
 # On a failed bootstrap, print a bounded diagnostic snapshot: compose status plus

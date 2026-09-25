@@ -219,7 +219,9 @@ build_module_steps() (
         exit 0
     fi
 
-    if ! git clone --depth 1 --single-branch $branch_arg --quiet "$BASE_URL/$name.git" >&2; then
+    # cnLSP 本地化修改：RMB 模块普遍带 raml-utilities 等 git 子模块，浅克隆必须
+    # 同步拉取子模块，否则 mvn 编译时缺 raml/xsd 定义直接失败（13/15 流通链模块如此）。
+    if ! git clone --depth 1 --single-branch --recurse-submodules --shallow-submodules $branch_arg --quiet "$BASE_URL/$name.git" >&2; then
         printf 'clone'
         exit 0
     fi
@@ -227,7 +229,10 @@ build_module_steps() (
     cd "$name"
 
     if [ "$skip_maven" != "true" ]; then
-        if ! mvn -T 1C -q --no-transfer-progress -DskipTests -DskipITs -Dmaven.javadoc.skip=true clean install >&2; then
+        # cnLSP 本地化修改：加 -Ddocker.skip=true，避免部分模块 pom 内嵌的
+        # docker-maven-plugin（io.fabric8，0.43 版）在 install 阶段直连新 Docker API
+        # 报 gson NPE（第二阶段的 SRS/inv-storage 即踩此坑）；镜像由下方 buildx 构建。
+        if ! mvn -T 1C -q --no-transfer-progress -DskipTests -DskipITs -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -Ddocker.skip=true clean install >&2; then
             printf 'maven'
             exit 0
         fi

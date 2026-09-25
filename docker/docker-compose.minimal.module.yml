@@ -51,7 +51,7 @@ services:
     image: ${MOD_USERS_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9001:8081"
+      - "29001:8081"
       - "10001:5005"
 
   mod-configuration:
@@ -60,7 +60,7 @@ services:
     image: ${MOD_CONFIGURATION_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9002:8081"
+      - "29002:8081"
       - "10002:5005"
 
   mod-permissions:
@@ -69,7 +69,7 @@ services:
     image: ${MOD_PERMISSIONS_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9003:8081"
+      - "29003:8081"
       - "10003:5005"
 
   mod-tags:
@@ -78,7 +78,7 @@ services:
     image: ${MOD_TAGS_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9004:8081"
+      - "29004:8081"
       - "10004:5005"
 
   mod-users-bl:
@@ -87,7 +87,7 @@ services:
     image: ${MOD_USERS_BL_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9005:8081"
+      - "29005:8081"
       - "10005:5005"
 
   mod-password-validator:
@@ -96,7 +96,7 @@ services:
     image: ${MOD_PASSWORD_VALIDATOR_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9007:8081"
+      - "29007:8081"
       - "10007:5005"
 
   mod-notes:
@@ -105,7 +105,7 @@ services:
     image: ${MOD_NOTES_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9008:8081"
+      - "29008:8081"
       - "10008:5005"
 
   mod-users-keycloak:
@@ -114,7 +114,7 @@ services:
     image: ${MOD_USERS_KEYCLOAK_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9009:8081"
+      - "29009:8081"
       - "10009:5005"
     environment:
       <<: [ *folio-module-env, *vault-env ]
@@ -139,7 +139,7 @@ services:
     image: ${MOD_LOGIN_KEYCLOAK_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9010:8081"
+      - "29010:8081"
       - "10010:5005"
     environment:
       <<: [ *folio-module-env, *vault-env ]
@@ -156,8 +156,14 @@ services:
     container_name: mod-roles-keycloak
     image: ${MOD_ROLES_KEYCLOAK_IMAGE}
     profiles: [ app-platform-minimal ]
+    deploy:
+      resources:
+        limits:
+          memory: 768m
+        reservations:
+          memory: 384m
     ports:
-      - "9011:8081"
+      - "29011:8081"
       - "10011:5005"
     environment:
       <<: [ *folio-module-env, *vault-env ]
@@ -171,7 +177,7 @@ services:
     image: ${MOD_SETTINGS_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9012:8081"
+      - "29012:8081"
       - "10012:5005"
 
   mod-scheduler:
@@ -180,7 +186,7 @@ services:
     image: ${MOD_SCHEDULER_IMAGE}
     profiles: [ app-platform-minimal ]
     ports:
-      - "9020:8081"
+      - "29020:8081"
       - "10020:5005"
     environment:
       <<: [ *folio-module-env, *vault-env ]
@@ -189,3 +195,382 @@ services:
         -Djdk.internal.httpclient.disableHostnameVerification=true
         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
         -XX:MaxRAMPercentage=70.0
+
+  mod-record-specifications:
+    <<: *folio-module
+    container_name: mod-record-specifications
+    image: ${MOD_RECORD_SPECIFICATIONS_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29013:8081"
+      - "10013:5005"
+    deploy:
+      resources:
+        limits:
+          memory: 768m
+        reservations:
+          memory: 384m
+
+  mod-source-record-storage:
+    <<: *folio-module
+    container_name: mod-source-record-storage
+    image: ${MOD_SOURCE_RECORD_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29014:8081"
+      - "10014:5005"
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+        reservations:
+          memory: 512m
+
+  mod-source-record-manager:
+    <<: *folio-module
+    container_name: mod-source-record-manager
+    image: ${MOD_SOURCE_RECORD_MANAGER_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29015:8081"
+      - "10015:5005"
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+        reservations:
+          memory: 512m
+
+  mod-di-converter-storage:
+    <<: *folio-module
+    container_name: mod-di-converter-storage
+    image: ${MOD_DI_CONVERTER_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29016:8081"
+      - "10016:5005"
+
+  mod-inventory-storage:
+    <<: *folio-module
+    container_name: mod-inventory-storage
+    image: ${MOD_INVENTORY_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29017:8081"
+      - "10017:5005"
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+        reservations:
+          memory: 512m
+
+  mod-entities-links:
+    <<: *folio-module
+    container_name: mod-entities-links
+    image: ${MOD_ENTITIES_LINKS_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29018:8081"
+      - "10018:5005"
+    environment:
+      <<: *folio-module-env
+      # Eureka 模式：系统用户由 mgr-tenant-entitlements 事件 + mod-users-keycloak 创建，
+      # 禁用模块租户初始化时的旧式（Okapi）系统用户创建，否则升级授权流程中会因
+      # entitlement_module 表切换窗口导致 sidecar 无法解析 mod-users-keycloak。
+      # 参照官方 eureka-cli/moduleenv/module_env.go 的默认设置。
+      SYSTEM_USER_ENABLED: "false"
+      FOLIO_SYSTEM_USER_ENABLED: "false"
+    # 该模块 Kafka 消费组多（authority 50 分区等），默认 384m 在授权后 OOM（exit 137）。
+    deploy:
+      resources:
+        limits:
+          memory: 640m
+        reservations:
+          memory: 256m
+
+  mod-quick-marc:
+    <<: *folio-module
+    container_name: mod-quick-marc
+    image: ${MOD_QUICK_MARC_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29019:8081"
+      - "10019:5005"
+
+  mod-circulation-storage:
+    <<: *folio-module
+    container_name: mod-circulation-storage
+    image: ${MOD_CIRCULATION_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29035:8081"
+      - "10035:5005"
+
+  mod-circulation:
+    <<: *folio-module
+    container_name: mod-circulation
+    image: ${MOD_CIRCULATION_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      # 官方 private-port：mod-circulation 监听 9801 而非 8081
+      - "29036:9801"
+      - "10036:5005"
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9801/admin/health || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  mod-feesfines:
+    <<: *folio-module
+    container_name: mod-feesfines
+    image: ${MOD_FEESFINES_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29037:8081"
+      - "10037:5005"
+
+  mod-patron-blocks:
+    <<: *folio-module
+    container_name: mod-patron-blocks
+    image: ${MOD_PATRON_BLOCKS_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29038:8081"
+      - "10038:5005"
+
+  mod-patron:
+    <<: *folio-module
+    container_name: mod-patron
+    image: ${MOD_PATRON_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29039:8081"
+      - "10039:5005"
+
+  mod-notify:
+    <<: *folio-module
+    container_name: mod-notify
+    image: ${MOD_NOTIFY_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29040:8081"
+      - "10040:5005"
+
+  mod-sender:
+    <<: *folio-module
+    container_name: mod-sender
+    image: ${MOD_SENDER_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29041:8081"
+      - "10041:5005"
+
+  mod-email:
+    <<: *folio-module
+    container_name: mod-email
+    image: ${MOD_EMAIL_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29042:8081"
+      - "10042:5005"
+
+  mod-template-engine:
+    <<: *folio-module
+    container_name: mod-template-engine
+    image: ${MOD_TEMPLATE_ENGINE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29043:8081"
+      - "10043:5005"
+
+  mod-calendar:
+    <<: *folio-module
+    container_name: mod-calendar
+    image: ${MOD_CALENDAR_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29044:8081"
+      - "10044:5005"
+    deploy:
+      resources:
+        limits:
+          # Spring Boot 模块，384m 在服务请求时被 OOMKill（exit 137）
+          memory: 640m
+        reservations:
+          memory: 384m
+
+  mod-pubsub:
+    <<: *folio-module
+    container_name: mod-pubsub
+    image: ${MOD_PUBSUB_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29045:8081"
+      - "10045:5005"
+    environment:
+      <<: *folio-module-env
+      # 官方 eureka-cli 对 mod-pubsub 标 disable-system-user：
+      # 禁用启动期系统用户创建，pubsub 运行时用 token 直通，不需要真实系统用户
+      FOLIO_SYSTEM_USER_ENABLED: "false"
+      SYSTEM_USER_CREATE: "false"
+      SYSTEM_USER_ENABLED: "false"
+      SYSTEM_USER_NAME: mod-pubsub
+      SYSTEM_USER_USERNAME: mod-pubsub
+
+  mod-audit:
+    <<: *folio-module
+    container_name: mod-audit
+    image: ${MOD_AUDIT_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29046:8081"
+      - "10046:5005"
+
+  mod-inventory:
+    <<: *folio-module
+    container_name: mod-inventory
+    image: ${MOD_INVENTORY_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      # 官方 private-port：mod-inventory 监听 9403 而非 8081
+      - "29047:9403"
+      - "10047:5005"
+    healthcheck:
+      test: [ "CMD-SHELL", "wget -q --spider http://localhost:9403/admin/health || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  mod-event-config:
+    <<: *folio-module
+    container_name: mod-event-config
+    image: ${MOD_EVENT_CONFIG_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29048:8081"
+      - "10048:5005"
+
+  mod-batch-print:
+    <<: *folio-module
+    container_name: mod-batch-print
+    image: ${MOD_BATCH_PRINT_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29049:8081"
+      - "10049:5005"
+
+  mod-orders-storage:
+    <<: *folio-module
+    container_name: mod-orders-storage
+    image: ${MOD_ORDERS_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29050:8081"
+      - "10050:5005"
+
+  mod-orders:
+    <<: *folio-module
+    container_name: mod-orders
+    image: ${MOD_ORDERS_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29051:8081"
+      - "10051:5005"
+    environment:
+      <<: *folio-module-env
+      # 官方 eureka-cli 标 disable-system-user
+      FOLIO_SYSTEM_USER_ENABLED: "false"
+      SYSTEM_USER_CREATE: "false"
+      SYSTEM_USER_ENABLED: "false"
+      SYSTEM_USER_NAME: mod-orders
+      SYSTEM_USER_USERNAME: mod-orders
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+        reservations:
+          memory: 384m
+
+  mod-invoice-storage:
+    <<: *folio-module
+    container_name: mod-invoice-storage
+    image: ${MOD_INVOICE_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29052:8081"
+      - "10052:5005"
+
+  mod-invoice:
+    <<: *folio-module
+    container_name: mod-invoice
+    image: ${MOD_INVOICE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29053:8081"
+      - "10053:5005"
+    environment:
+      <<: *folio-module-env
+      # 官方 eureka-cli 标 disable-system-user
+      FOLIO_SYSTEM_USER_ENABLED: "false"
+      SYSTEM_USER_CREATE: "false"
+      SYSTEM_USER_ENABLED: "false"
+      SYSTEM_USER_NAME: mod-invoice
+      SYSTEM_USER_USERNAME: mod-invoice
+    deploy:
+      resources:
+        limits:
+          # 384m 在启动末期被 OOMKill（货币汇率 provider + Kafka consumer）
+          memory: 640m
+        reservations:
+          memory: 384m
+
+  mod-finance:
+    <<: *folio-module
+    container_name: mod-finance
+    image: ${MOD_FINANCE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29054:8081"
+      - "10054:5005"
+
+  mod-finance-storage:
+    <<: *folio-module
+    container_name: mod-finance-storage
+    image: ${MOD_FINANCE_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29055:8081"
+      - "10055:5005"
+    environment:
+      <<: [ *folio-module-env, *vault-env ]
+
+  mod-organizations-storage:
+    <<: *folio-module
+    container_name: mod-organizations-storage
+    image: ${MOD_ORGANIZATIONS_STORAGE_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29056:8081"
+      - "10056:5005"
+
+  mod-organizations:
+    <<: *folio-module
+    container_name: mod-organizations
+    image: ${MOD_ORGANIZATIONS_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29057:8081"
+      - "10057:5005"
+
+  mod-courses:
+    <<: *folio-module
+    container_name: mod-courses
+    image: ${MOD_COURSES_IMAGE}
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "29058:8081"
+      - "10058:5005"

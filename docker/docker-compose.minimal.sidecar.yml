@@ -218,3 +218,438 @@ services:
       MODULE_VERSION: ${MOD_SCHEDULER_VERSION}
       MODULE_URL: http://mod-scheduler:8081
       SIDECAR_URL: http://sc-scheduler:8081
+
+  sc-record-specifications:
+    <<: *sidecar-module
+    container_name: sc-record-specifications
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19013:8081"
+      - "11013:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-record-specifications
+      MODULE_VERSION: ${MOD_RECORD_SPECIFICATIONS_VERSION}
+      MODULE_URL: http://mod-record-specifications:8081
+      SIDECAR_URL: http://sc-record-specifications:8081
+
+  sc-source-record-storage:
+    <<: *sidecar-module
+    container_name: sc-source-record-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19014:8081"
+      - "11014:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-source-record-storage
+      MODULE_VERSION: ${MOD_SOURCE_RECORD_STORAGE_VERSION}
+      MODULE_URL: http://mod-source-record-storage:8081
+      SIDECAR_URL: http://sc-source-record-storage:8081
+
+  sc-source-record-manager:
+    <<: *sidecar-module
+    container_name: sc-source-record-manager
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19015:8081"
+      - "11015:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-source-record-manager
+      MODULE_VERSION: ${MOD_SOURCE_RECORD_MANAGER_VERSION}
+      MODULE_URL: http://mod-source-record-manager:8081
+      SIDECAR_URL: http://sc-source-record-manager:8081
+
+  sc-di-converter-storage:
+    <<: *sidecar-module
+    container_name: sc-di-converter-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19016:8081"
+      - "11016:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-di-converter-storage
+      MODULE_VERSION: ${MOD_DI_CONVERTER_STORAGE_VERSION}
+      MODULE_URL: http://mod-di-converter-storage:8081
+      SIDECAR_URL: http://sc-di-converter-storage:8081
+
+  sc-inventory-storage:
+    <<: *sidecar-module
+    container_name: sc-inventory-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19017:8081"
+      - "11017:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-inventory-storage
+      MODULE_VERSION: ${MOD_INVENTORY_STORAGE_VERSION}
+      MODULE_URL: http://mod-inventory-storage:8081
+      SIDECAR_URL: http://sc-inventory-storage:8081
+
+  sc-entities-links:
+    <<: *sidecar-module
+    container_name: sc-entities-links
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19018:8081"
+      - "11018:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-entities-links
+      MODULE_VERSION: ${MOD_ENTITIES_LINKS_VERSION}
+      MODULE_URL: http://mod-entities-links:8081
+      SIDECAR_URL: http://sc-entities-links:8081
+
+  sc-quick-marc:
+    <<: *sidecar-module
+    container_name: sc-quick-marc
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19019:8081"
+      - "11019:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-quick-marc
+      MODULE_VERSION: ${MOD_QUICK_MARC_VERSION}
+      MODULE_URL: http://mod-quick-marc:8081
+      SIDECAR_URL: http://sc-quick-marc:8081
+
+
+  sc-circulation-storage:
+    <<: *sidecar-module
+    container_name: sc-circulation-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19035:8081"
+      - "11035:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-circulation-storage
+      MODULE_VERSION: ${MOD_CIRCULATION_STORAGE_VERSION}
+      MODULE_URL: http://mod-circulation-storage:8081
+      SIDECAR_URL: http://sc-circulation-storage:8081
+
+  sc-circulation:
+    <<: *sidecar-module
+    container_name: sc-circulation
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19036:8081"
+      - "11036:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-circulation
+      MODULE_VERSION: ${MOD_CIRCULATION_VERSION}
+      MODULE_URL: http://mod-circulation:9801  # 官方 private-port
+      SIDECAR_URL: http://sc-circulation:8081
+
+  sc-feesfines:
+    <<: *sidecar-module
+    container_name: sc-feesfines
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19037:8081"
+      - "11037:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-feesfines
+      MODULE_VERSION: ${MOD_FEESFINES_VERSION}
+      MODULE_URL: http://mod-feesfines:8081
+      SIDECAR_URL: http://sc-feesfines:8081
+
+  sc-patron-blocks:
+    <<: *sidecar-module
+    container_name: sc-patron-blocks
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19038:8081"
+      - "11038:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-patron-blocks
+      MODULE_VERSION: ${MOD_PATRON_BLOCKS_VERSION}
+      MODULE_URL: http://mod-patron-blocks:8081
+      SIDECAR_URL: http://sc-patron-blocks:8081
+
+  sc-patron:
+    <<: *sidecar-module
+    container_name: sc-patron
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19039:8081"
+      - "11039:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-patron
+      MODULE_VERSION: ${MOD_PATRON_VERSION}
+      MODULE_URL: http://mod-patron:8081
+      SIDECAR_URL: http://sc-patron:8081
+
+  sc-notify:
+    <<: *sidecar-module
+    container_name: sc-notify
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19040:8081"
+      - "11040:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-notify
+      MODULE_VERSION: ${MOD_NOTIFY_VERSION}
+      MODULE_URL: http://mod-notify:8081
+      SIDECAR_URL: http://sc-notify:8081
+
+  sc-sender:
+    <<: *sidecar-module
+    container_name: sc-sender
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19041:8081"
+      - "11041:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-sender
+      MODULE_VERSION: ${MOD_SENDER_VERSION}
+      MODULE_URL: http://mod-sender:8081
+      SIDECAR_URL: http://sc-sender:8081
+
+  sc-email:
+    <<: *sidecar-module
+    container_name: sc-email
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19042:8081"
+      - "11042:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-email
+      MODULE_VERSION: ${MOD_EMAIL_VERSION}
+      MODULE_URL: http://mod-email:8081
+      SIDECAR_URL: http://sc-email:8081
+
+  sc-template-engine:
+    <<: *sidecar-module
+    container_name: sc-template-engine
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19043:8081"
+      - "11043:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-template-engine
+      MODULE_VERSION: ${MOD_TEMPLATE_ENGINE_VERSION}
+      MODULE_URL: http://mod-template-engine:8081
+      SIDECAR_URL: http://sc-template-engine:8081
+
+  sc-calendar:
+    <<: *sidecar-module
+    container_name: sc-calendar
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19044:8081"
+      - "11044:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-calendar
+      MODULE_VERSION: ${MOD_CALENDAR_VERSION}
+      MODULE_URL: http://mod-calendar:8081
+      SIDECAR_URL: http://sc-calendar:8081
+
+  sc-pubsub:
+    <<: *sidecar-module
+    container_name: sc-pubsub
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19045:8081"
+      - "11045:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-pubsub
+      MODULE_VERSION: ${MOD_PUBSUB_VERSION}
+      MODULE_URL: http://mod-pubsub:8081
+      SIDECAR_URL: http://sc-pubsub:8081
+
+  sc-audit:
+    <<: *sidecar-module
+    container_name: sc-audit
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19046:8081"
+      - "11046:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-audit
+      MODULE_VERSION: ${MOD_AUDIT_VERSION}
+      MODULE_URL: http://mod-audit:8081
+      SIDECAR_URL: http://sc-audit:8081
+
+  sc-inventory:
+    <<: *sidecar-module
+    container_name: sc-inventory
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19047:8081"
+      - "11047:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-inventory
+      MODULE_VERSION: ${MOD_INVENTORY_VERSION}
+      MODULE_URL: http://mod-inventory:9403  # 官方 private-port
+      SIDECAR_URL: http://sc-inventory:8081
+
+  sc-event-config:
+    <<: *sidecar-module
+    container_name: sc-event-config
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19048:8081"
+      - "11048:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-event-config
+      MODULE_VERSION: ${MOD_EVENT_CONFIG_VERSION}
+      MODULE_URL: http://mod-event-config:8081
+      SIDECAR_URL: http://sc-event-config:8081
+
+  sc-batch-print:
+    <<: *sidecar-module
+    container_name: sc-batch-print
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19049:8081"
+      - "11049:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-batch-print
+      MODULE_VERSION: ${MOD_BATCH_PRINT_VERSION}
+      MODULE_URL: http://mod-batch-print:8081
+      SIDECAR_URL: http://sc-batch-print:8081
+
+  sc-orders-storage:
+    <<: *sidecar-module
+    container_name: sc-orders-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19050:8081"
+      - "11050:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-orders-storage
+      MODULE_VERSION: ${MOD_ORDERS_STORAGE_VERSION}
+      MODULE_URL: http://mod-orders-storage:8081
+      SIDECAR_URL: http://sc-orders-storage:8081
+
+  sc-orders:
+    <<: *sidecar-module
+    container_name: sc-orders
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19051:8081"
+      - "11051:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-orders
+      MODULE_VERSION: ${MOD_ORDERS_VERSION}
+      MODULE_URL: http://mod-orders:8081
+      SIDECAR_URL: http://sc-orders:8081
+
+  sc-invoice-storage:
+    <<: *sidecar-module
+    container_name: sc-invoice-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19052:8081"
+      - "11052:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-invoice-storage
+      MODULE_VERSION: ${MOD_INVOICE_STORAGE_VERSION}
+      MODULE_URL: http://mod-invoice-storage:8081
+      SIDECAR_URL: http://sc-invoice-storage:8081
+
+  sc-invoice:
+    <<: *sidecar-module
+    container_name: sc-invoice
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19053:8081"
+      - "11053:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-invoice
+      MODULE_VERSION: ${MOD_INVOICE_VERSION}
+      MODULE_URL: http://mod-invoice:8081
+      SIDECAR_URL: http://sc-invoice:8081
+
+  sc-finance:
+    <<: *sidecar-module
+    container_name: sc-finance
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19054:8081"
+      - "11054:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-finance
+      MODULE_VERSION: ${MOD_FINANCE_VERSION}
+      MODULE_URL: http://mod-finance:8081
+      SIDECAR_URL: http://sc-finance:8081
+
+  sc-finance-storage:
+    <<: *sidecar-module
+    container_name: sc-finance-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19055:8081"
+      - "11055:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-finance-storage
+      MODULE_VERSION: ${MOD_FINANCE_STORAGE_VERSION}
+      MODULE_URL: http://mod-finance-storage:8081
+      SIDECAR_URL: http://sc-finance-storage:8081
+
+  sc-organizations-storage:
+    <<: *sidecar-module
+    container_name: sc-organizations-storage
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19056:8081"
+      - "11056:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-organizations-storage
+      MODULE_VERSION: ${MOD_ORGANIZATIONS_STORAGE_VERSION}
+      MODULE_URL: http://mod-organizations-storage:8081
+      SIDECAR_URL: http://sc-organizations-storage:8081
+
+  sc-organizations:
+    <<: *sidecar-module
+    container_name: sc-organizations
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19057:8081"
+      - "11057:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-organizations
+      MODULE_VERSION: ${MOD_ORGANIZATIONS_VERSION}
+      MODULE_URL: http://mod-organizations:8081
+      SIDECAR_URL: http://sc-organizations:8081
+
+  sc-courses:
+    <<: *sidecar-module
+    container_name: sc-courses
+    profiles: [ app-platform-minimal ]
+    ports:
+      - "19058:8081"
+      - "11058:5005"
+    environment:
+      <<: *sidecar-env
+      MODULE_NAME: mod-courses
+      MODULE_VERSION: ${MOD_COURSES_VERSION}
+      MODULE_URL: http://mod-courses:8081
+      SIDECAR_URL: http://sc-courses:8081

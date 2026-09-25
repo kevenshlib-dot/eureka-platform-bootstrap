@@ -831,9 +831,9 @@ run_bootstrap_flow() {
   wait_for_all_healthy
   recover_api_gateway_if_needed
   wait_for_gateway_proxy_ready
-  wait_for_http_ready 'http://localhost:8000/applications' 'applications route' '200 401 403 404 405'
-  wait_for_http_ready 'http://localhost:8000/tenants' 'tenants route' '200 401 403 404 405'
-  wait_for_http_ready 'http://localhost:8000/entitlements' 'entitlements route' '200 401 403 404 405'
+  wait_for_http_ready 'http://localhost:18000/applications' 'applications route' '200 401 403 404 405'
+  wait_for_http_ready 'http://localhost:18000/tenants' 'tenants route' '200 401 403 404 405'
+  wait_for_http_ready 'http://localhost:18000/entitlements' 'entitlements route' '200 401 403 404 405'
 
   ui_phase 'Register application'
   ui_step 'Obtaining system access token'
@@ -846,7 +846,7 @@ run_bootstrap_flow() {
   ui_debug "Application services: ${APP_SERVICES[*]}"
   docker compose up -d "${APP_SERVICES[@]}"
   wait_for_all_healthy
-  wait_for_http_ready 'http://localhost:8000/capabilities?limit=1' 'capabilities route' '200 401 403 404 405'
+  wait_for_http_ready 'http://localhost:18000/capabilities?limit=1' 'capabilities route' '200 401 403 404 405'
   ui_ok "Application services deployed for ${APP_NAME}."
 
   ui_phase 'Finalize tenant setup'
